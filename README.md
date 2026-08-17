@@ -35,3 +35,10 @@ https://calendar.app.google/mh5X91ErPgUXtCqR7
 
 ## File structure
 All deployable files are in a single flat root directory. No subfolders are required.
+
+
+## V2 updates
+- Solutions page now uses the customer-facing flow: **What you want → What I diagnose → What we may change → How we measure improvement**
+- Six solution areas are interactive on one page
+- Diagnostic page now includes the full Revenue Execution flow: **Goal → Metric → Processes → Evidence → Gap → Improvement → Execute → Measure**
+- Flat file structure retained; no subfolders
