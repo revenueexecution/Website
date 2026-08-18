@@ -3,34 +3,357 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Revenue Execution — Business Performance for Owners</title>
-<meta name="description" content="Revenue Execution helps business owners identify and fix the commercial and operational constraints holding back growth, profitability and performance.">
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="stylesheet" href="styles.css">
+<meta name="description" content="Revenue Execution helps business owners identify what is preventing the business achieving its goals, determine what needs to change, and implement the commercial and operational improvements required." />
+<title>Revenue Execution — Commercial Performance for Owner-Led Businesses</title>
+<style>
+:root{
+  --ink:#10252b;--ink2:#183a42;--paper:#f7f6f1;--white:#fff;
+  --mint:#dcece5;--green:#2f705d;--green2:#235746;--muted:#66777b;
+  --line:#d8dfdc;--warm:#ece7dc;--soft:#eff3f1;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+nav{position:sticky;top:0;z-index:50;background:rgba(247,246,241,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(16,37,43,.08)}
+.navinner{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{font-weight:850;letter-spacing:-.02em;font-size:20px}
+.navlinks{display:flex;gap:26px;align-items:center;font-size:14px;font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 19px;border-radius:999px;background:var(--ink);color:#fff;font-weight:800;font-size:14px;border:1px solid var(--ink);transition:.18s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.alt{background:transparent;color:var(--ink)}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:850;color:var(--green)}
+.hero{padding:102px 0 86px}
+.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:70px;align-items:center}
+h1{font-size:67px;line-height:1.02;letter-spacing:-.055em;margin:14px 0 26px;max-width:820px}
+.lead{font-size:20px;color:var(--ink2);max-width:760px;margin:0 0 32px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-card{background:var(--ink);color:#fff;border-radius:28px;padding:34px;box-shadow:0 22px 60px rgba(16,37,43,.16)}
+.hero-card .label{font-size:12px;text-transform:uppercase;letter-spacing:.13em;color:#a9d2c4;font-weight:850}
+.hero-card h3{font-size:29px;line-height:1.12;margin:12px 0 22px;letter-spacing:-.025em}
+.logic-flow{display:grid;gap:10px}
+.logic-flow div{padding:13px 14px;border:1px solid rgba(255,255,255,.16);border-radius:14px;background:rgba(255,255,255,.04);font-weight:700}
+section{padding:88px 0}
+.section-head{max-width:820px;margin-bottom:38px}
+h2{font-size:46px;line-height:1.08;letter-spacing:-.04em;margin:10px 0 14px}
+.section-head p{font-size:18px;color:var(--muted);margin:0}
+.issues{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.issue{display:block;background:var(--white);border:2px solid var(--line);padding:27px;border-radius:20px;min-height:218px;transition:.18s ease;cursor:pointer}
+.issue:hover{transform:translateY(-3px);border:3px solid var(--green);padding:26px;box-shadow:0 14px 30px rgba(16,37,43,.08)}
+.issue .n{font-size:12px;font-weight:900;color:var(--green);letter-spacing:.13em}
+.issue h3{font-size:23px;line-height:1.16;letter-spacing:-.025em;margin:13px 0 12px}
+.issue p{margin:0;color:var(--muted);font-size:15.5px}
+.issue .more{display:block;margin-top:16px;color:var(--green2);font-weight:800;font-size:13px}
+.solutions{background:var(--soft)}
+.solution-nav{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 22px}
+.solution-nav button{border:2px solid var(--line);background:white;color:var(--ink);border-radius:16px;padding:16px 17px;text-align:left;cursor:pointer;transition:.18s ease;font:inherit}
+.solution-nav button:hover{border-color:var(--green)}
+.solution-nav button.active{background:var(--green);border-color:var(--green);color:white}
+.solution-nav strong{display:block;font-size:16px;margin-bottom:3px}
+.solution-nav span{font-size:12.5px;opacity:.78}
+.solution{display:none}
+.solution.active{display:block}
+.solution-hero{background:var(--mint);border:1px solid rgba(47,112,93,.17);border-radius:24px;padding:30px;margin-bottom:16px}
+.solution-hero h3{font-size:36px;line-height:1.08;letter-spacing:-.035em;margin:7px 0 10px}
+.solution-hero p{font-size:17px;margin:0;color:var(--ink2);max-width:900px}
+.solution-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.flow-step{background:white;border:1px solid var(--line);border-radius:20px;padding:24px;min-height:240px;position:relative}
+.flow-step::after{content:"→";position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--green);font-size:18px;font-weight:900;z-index:2}
+.flow-step:last-child::after{display:none}
+.flow-step .label{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.flow-step h4{margin:0 0 9px;font-size:21px;line-height:1.14;letter-spacing:-.025em}
+.flow-step p{margin:0;color:var(--muted);font-size:14px}
+.flow-step ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:13.5px}
+.flow-step li{margin:5px 0}
+.flow-step.measure{background:var(--ink);color:white;border-color:var(--ink)}
+.flow-step.measure .label{color:#9ed0c0}
+.flow-step.measure li{color:#c6d3d5}
+.example{margin-top:16px;background:var(--warm);border:1px solid rgba(16,37,43,.08);border-radius:18px;padding:20px 22px;display:grid;grid-template-columns:140px 1fr;gap:18px}
+.example b{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--green2)}
+.example span{color:var(--ink2);font-size:14.5px}
+.method{background:var(--ink);color:white}
+.method .section-head p{color:#b9c7c9}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:28px;background:rgba(255,255,255,.035)}
+.step span{font-size:12px;color:#9ed0c0;font-weight:900;letter-spacing:.12em}
+.step h3{font-size:26px;margin:12px 0 9px}
+.step p{color:#c4d0d2;margin:0}
+.diagnostic{background:var(--mint)}
+.diag-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:70px;align-items:start}
+.price{display:inline-block;margin:6px 0 22px;padding:8px 12px;border-radius:999px;background:var(--ink);color:#fff;font-size:14px;font-weight:850}
+.diag-box{background:white;border-radius:24px;padding:30px;border:1px solid rgba(47,112,93,.18)}
+.diag-list{display:grid;gap:14px;margin-top:8px}
+.diag-row{display:grid;grid-template-columns:140px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}
+.diag-row:last-child{border-bottom:0}
+.diag-row b{font-size:14px}
+.diag-row span{color:var(--muted);font-size:14px}
+.scope{margin-top:18px;background:var(--warm);border-radius:16px;padding:18px 20px;border:1px solid rgba(16,37,43,.08)}
+.scope b{display:block;margin-bottom:5px}
+.scope span{font-size:14px;color:var(--ink2)}
+.system-grid{display:grid;grid-template-columns:.84fr 1.16fr;gap:70px;align-items:center}
+.system-map{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pill{background:white;border:1px solid var(--line);padding:15px 12px;border-radius:14px;text-align:center;font-weight:700;font-size:14px}
+.proof{background:var(--warm)}
+.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+blockquote{margin:0;background:white;border-radius:22px;padding:29px;font-size:20px;line-height:1.45;border:1px solid rgba(16,37,43,.08)}
+blockquote small{display:block;margin-top:18px;font-size:13px;color:var(--muted);font-weight:700}
+.cta{padding:90px 0}
+.cta-box{background:var(--green);color:white;border-radius:28px;padding:56px;display:flex;align-items:end;justify-content:space-between;gap:40px}
+.cta-box h2{margin:0 0 10px;max-width:720px}
+.cta-box p{margin:0;color:#dcebe6;max-width:640px}
+.cta-box .btn{background:white;color:var(--ink);border-color:white;white-space:nowrap}
+footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--muted);font-size:13px}
+.footer-row{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.footer-row a{text-decoration:underline}
+@media(max-width:960px){
+ .hero-grid,.diag-grid,.system-grid,.proof-grid{grid-template-columns:1fr}
+ .issues,.steps,.solution-nav{grid-template-columns:1fr 1fr}
+ .solution-flow{grid-template-columns:1fr 1fr}
+ .flow-step:nth-child(2)::after{display:none}
+ h1{font-size:49px}
+ .navlinks a:not(.btn){display:none}
+ .cta-box{align-items:start;flex-direction:column}
+}
+@media(max-width:650px){
+ .wrap{padding-left:20px;padding-right:20px}
+ .issues,.steps,.solution-nav,.solution-flow{grid-template-columns:1fr}
+ .flow-step::after{display:none}
+ h1{font-size:41px}.hero{padding-top:70px}
+ .cta-box{padding:34px}.diag-row,.example{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
-<nav><div class="wrap navinner"><a class="brand" href="index.html">Revenue Execution</a><div class="navlinks"><a class="active" href="index.html">Home</a><a href="solutions.html">Solutions</a><a href="diagnostic.html">Diagnostic</a><a href="about.html">About</a><a class="btn" href="https://calendar.app.google/mh5X91ErPgUXtCqR7" target="_blank" rel="noopener">Book an introductory call</a></div></div></nav>
+<nav>
+  <div class="wrap navinner">
+    <a class="brand" href="#top">Revenue Execution</a>
+    <div class="navlinks">
+      <a href="#issues">Problems I Fix</a>
+      <a href="#diagnostic">Diagnostic</a>
+      <a href="#method">How I Work</a>
+      <a href="#about">About</a>
+      <a class="btn" href="https://calendar.app.google/mh5X91ErPgUXtCqR7" target="_blank" rel="noopener">Book an introductory call</a>
+    </div>
+  </div>
+</nav>
 
-<header class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">Commercial performance for owner-led businesses</div><h1>You know where you want the business to go. I find what’s stopping it.</h1><p class="lead">Revenue Execution helps business owners identify the commercial and operational constraints holding back growth, profitability and performance — then implement the changes required.</p><div class="actions"><a class="btn" href="https://calendar.app.google/mh5X91ErPgUXtCqR7" target="_blank" rel="noopener">Book an introductory call</a><a class="btn alt" href="#issues">See the problems I help solve</a></div></div><div class="hero-card"><div class="label">The logic</div><h3>Start with your goal. Work backwards to the constraint.</h3><div class="flow"><div>Your goal</div><div>Metric</div><div>Process</div><div>Gap</div><div>Improvement</div></div></div></div></header>
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Commercial performance for owner-led businesses</div>
+      <h1>You know where you want the business to go. I find what’s stopping it.</h1>
+      <p class="lead">Revenue Execution helps business owners identify the commercial and operational constraints holding back growth, profitability and performance — then implement the changes required.</p>
+      <div class="actions">
+        <a class="btn" href="#diagnostic">Start with a diagnostic</a>
+        <a class="btn alt" href="#issues">See the problems I fix</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="label">The logic</div>
+      <h3>Start with your goal. Work backwards to the constraint.</h3>
+      <div class="logic-flow">
+        <div>Owner goal</div><div>Metric</div><div>Process</div><div>Gap</div><div>Improvement</div>
+      </div>
+    </div>
+  </div>
+</header>
 
-<section id="issues"><div class="wrap"><div class="section-head"><div class="eyebrow">What owners call me about</div><h2>Six business problems that can materially affect performance.</h2><p>I identify what is driving the problem, focus on the changes that will have the greatest commercial impact, and help implement them.</p></div><div class="issues">
-<a class="issue" href="solutions.html#growth"><div class="n">01</div><h3>Growth has stalled or revenue targets are being missed</h3><p>The business has traction, but the next phase of growth is not happening consistently enough.</p><span class="more">Explore this problem →</span></a>
-<a class="issue" href="solutions.html#profit"><div class="n">02</div><h3>Profit isn’t keeping pace with revenue</h3><p>You are selling, but pricing, margin, customer mix, cost-to-serve or operational inefficiency are eroding the result.</p><span class="more">Explore this problem →</span></a>
-<a class="issue" href="solutions.html#pipeline"><div class="n">03</div><h3>Pipeline exists, but it isn’t converting reliably</h3><p>There is activity and opportunity, but qualification, progression, messaging or execution are producing too much leakage.</p><span class="more">Explore this problem →</span></a>
-<a class="issue" href="solutions.html#predictability"><div class="n">04</div><h3>Forecasts and commercial visibility can’t be trusted</h3><p>You cannot see future performance clearly enough to plan, invest or intervene with confidence.</p><span class="more">Explore this problem →</span></a>
-<a class="issue" href="solutions.html#dependency"><div class="n">05</div><h3>Too much still depends on the owner</h3><p>Key customers, decisions, deals and processes keep coming back to you, limiting scale and creating risk.</p><span class="more">Explore this problem →</span></a>
-<a class="issue" href="solutions.html#process"><div class="n">06</div><h3>The business has outgrown the processes running it</h3><p>Manual work, inconsistent handoffs, weak reporting and unclear ownership are starting to constrain performance.</p><span class="more">Explore this problem →</span></a>
-</div><div class="cred-strip"><b>20+ years inside commercial environments</b><span class="cred-logos">Eircom · British Telecom · Oracle · Cloudera · ACETECH · Bluemetrix</span></div></div></section>
+<section id="issues">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What owners call me about</div>
+      <h2>Real business problems. Usually with more than one cause.</h2>
+      <p>I diagnose what is driving the problem, identify the highest-value changes and help implement them.</p>
+    </div>
+    <div class="issues">
+      <a class="issue" href="#solutions" data-solution="growth"><div class="n">01</div><h3>Growth has stalled or revenue targets are being missed</h3><p>The business has traction, but the next phase of growth is not happening consistently enough.</p><span class="more">See how I approach this →</span></a>
+      <a class="issue" href="#solutions" data-solution="profit"><div class="n">02</div><h3>Profit isn’t keeping pace with revenue</h3><p>You are selling, but pricing, margin, customer mix, cost-to-serve or operational inefficiency are eroding the result.</p><span class="more">See how I approach this →</span></a>
+      <a class="issue" href="#solutions" data-solution="pipeline"><div class="n">03</div><h3>Pipeline exists, but it isn’t converting reliably</h3><p>There is activity and opportunity, but qualification, progression, messaging or execution are producing too much leakage.</p><span class="more">See how I approach this →</span></a>
+      <a class="issue" href="#solutions" data-solution="predict"><div class="n">04</div><h3>Forecasts and commercial visibility can’t be trusted</h3><p>You cannot see future performance clearly enough to plan, invest or intervene with confidence.</p><span class="more">See how I approach this →</span></a>
+      <a class="issue" href="#solutions" data-solution="dependency"><div class="n">05</div><h3>Too much still depends on the owner</h3><p>Key customers, decisions, deals and processes keep coming back to you, limiting scale and creating risk.</p><span class="more">See how I approach this →</span></a>
+      <a class="issue" href="#solutions" data-solution="scale"><div class="n">06</div><h3>The business has outgrown the processes running it</h3><p>Manual work, inconsistent handoffs, weak reporting and unclear ownership are starting to constrain performance.</p><span class="more">See how I approach this →</span></a>
+    </div>
+  </div>
+</section>
 
-<section class="method" id="method"><div class="wrap"><div class="section-head"><div class="eyebrow" style="color:#9ed0c0">How I work</div><h2>Diagnose. Plan. Execute.</h2><p>The work starts with the outcome you need and the evidence behind current performance, then turns the findings into a practical plan and implementation.</p></div><div class="steps"><div class="step"><span>01</span><h3>Diagnose</h3><p>Review the evidence, metrics, processes and conversations needed to isolate the real constraint.</p></div><div class="step"><span>02</span><h3>Plan</h3><p>Define the required change, sequence the priorities and build a practical implementation plan.</p></div><div class="step"><span>03</span><h3>Execute</h3><p>Work alongside the business to implement the changes and embed them into normal operations.</p></div></div></div></section>
+<section class="solutions" id="solutions">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How I help</div>
+      <h2>Start with the business result you need to improve.</h2>
+      <p>The website stays simple: Goal → Diagnose → Improve → Measure. The diagnosis determines what actually needs to change.</p>
+    </div>
 
-<section class="diagnostic" id="diagnostic"><div class="wrap diag-grid"><div><div class="eyebrow">Find what needs to change</div><h2>Owner Business Performance Diagnostic</h2><p class="lead" style="font-size:18px">You tell me what you are trying to achieve and where the business is falling short. I work backwards from the goal to identify what is actually preventing it.</p><a class="btn" href="diagnostic.html">See how the diagnostic works</a></div><div class="diag-box"><div class="diag-list"><div class="diag-row"><b>Start with</b><span>Your business goal, target or problem.</span></div><div class="diag-row"><b>Examine</b><span>The metrics, evidence and processes that influence the result.</span></div><div class="diag-row"><b>Identify</b><span>The gaps, root causes and constraints with the greatest commercial impact.</span></div><div class="diag-row"><b>Output</b><span>A clear, prioritised view of what needs to change and why.</span></div><div class="diag-row"><b>Then</b><span>Decide what should happen next: act internally, build the plan, or work together to implement the changes.</span></div></div></div></div></section>
+    <div class="solution-nav">
+      <button class="active" data-target="growth"><strong>Grow Revenue</strong><span>When growth has stalled or targets are being missed.</span></button>
+      <button data-target="profit"><strong>Improve Profitability</strong><span>When revenue is growing but profit is not.</span></button>
+      <button data-target="pipeline"><strong>Improve Pipeline Conversion</strong><span>When opportunity exists but too little converts.</span></button>
+      <button data-target="predict"><strong>Increase Predictability</strong><span>When forecasts and visibility cannot be trusted.</span></button>
+      <button data-target="dependency"><strong>Reduce Owner Dependency</strong><span>When too much still comes back to the owner.</span></button>
+      <button data-target="scale"><strong>Improve Process & Scale</strong><span>When the business has outgrown how work gets done.</span></button>
+    </div>
 
-<section><div class="wrap system-grid"><div><div class="eyebrow">Why diagnosis matters</div><h2>Performance is produced by a system, not one isolated function.</h2><p class="lead" style="font-size:18px">A growth problem might be pipeline, pricing, retention, proposition or execution. A profitability problem might sit in discounting, customer mix, process cost or operating discipline. The visible symptom is rarely the whole problem.</p></div><div class="system-map"><div class="pill">Market</div><div class="pill">Customers</div><div class="pill">Proposition</div><div class="pill">Pricing</div><div class="pill">GTM</div><div class="pill">Sales</div><div class="pill">Operations</div><div class="pill">Management</div><div class="pill">Data</div><div class="pill">Governance</div><div class="pill">Process</div><div class="pill">Execution</div></div></div></section>
+    <div id="growth" class="solution active">
+      <div class="solution-hero"><div class="eyebrow">Grow Revenue</div><h3>Find what is constraining growth — then fix it.</h3><p>Growth problems are not always lead-generation problems. The constraint may sit in qualification, conversion, pricing, retention, expansion or execution.</p></div>
+      <div class="solution-flow">
+        <div class="flow-step"><div class="label">What you want</div><h4>Reach the next revenue target</h4><p>For example, grow annual revenue from €4m to €5m.</p></div>
+        <div class="flow-step"><div class="label">What I diagnose</div><h4>The processes controlling growth</h4><ul><li>Pipeline generation and quality</li><li>Conversion and win rate</li><li>Pricing and proposition</li><li>Retention and expansion</li></ul></div>
+        <div class="flow-step"><div class="label">What we may change</div><h4>The 1–3 constraints that matter most</h4><ul><li>Qualification standards</li><li>Sales process or messaging</li><li>Pricing / packaging</li><li>Account expansion process</li></ul></div>
+        <div class="flow-step measure"><div class="label">How we measure it</div><h4>Did growth improve?</h4><ul><li>Revenue growth</li><li>Win rate</li><li>Stage conversion</li><li>Expansion revenue</li></ul></div>
+      </div>
+      <div class="example"><b>Example finding</b><span>The business has enough pipeline, but poor qualification and weak proposal conversion are suppressing growth. The answer is not “more leads”; it is better deal quality and execution.</span></div>
+    </div>
 
-<section class="proof" id="about"><div class="wrap proof-grid"><div><div class="eyebrow">About</div><h2>20+ years building and fixing commercial performance.</h2><p class="lead" style="font-size:18px">I work directly with owners and leadership teams, combining commercial experience with evidence-led diagnosis and hands-on implementation. My background spans enterprise sales, GTM, pricing, partner development, enablement, commercial operations and business transformation.</p><p><b>Experience includes:</b> Eircom · BT · Oracle · Cloudera · ACETECH · Bluemetrix</p><a class="btn alt" href="about.html">More about Richard</a></div><blockquote>“Richard cut straight through our pipeline noise and installed the exact execution discipline our leadership team needed to scale predictably.”<small>David Heneghan, CEO — CX Index</small></blockquote></div></section>
+    <div id="profit" class="solution">
+      <div class="solution-hero"><div class="eyebrow">Improve Profitability</div><h3>Find where margin is leaking.</h3><p>Profitability can be eroded by pricing, discounting, customer mix, delivery cost, manual work or commercial terms — even when revenue looks healthy.</p></div>
+      <div class="solution-flow">
+        <div class="flow-step"><div class="label">What you want</div><h4>Turn more revenue into profit</h4><p>For example, improve gross margin from 28% to 35%.</p></div>
+        <div class="flow-step"><div class="label">What I diagnose</div><h4>Where margin is being lost</h4><ul><li>Pricing and discounting</li><li>Customer / product mix</li><li>Cost-to-serve</li><li>Manual process cost</li></ul></div>
+        <div class="flow-step"><div class="label">What we may change</div><h4>The commercial or operational leakage</h4><ul><li>Pricing controls</li><li>Approval rules</li><li>Workflow redesign</li><li>Automation and reporting</li></ul></div>
+        <div class="flow-step measure"><div class="label">How we measure it</div><h4>Did margin improve?</h4><ul><li>Gross margin</li><li>Discount rate</li><li>Cost-to-serve</li><li>Revenue per FTE</li></ul></div>
+      </div>
+      <div class="example"><b>Example finding</b><span>Revenue is healthy, but uncontrolled discounting and an expensive manual delivery process are eroding margin. The improvement combines commercial discipline with process redesign.</span></div>
+    </div>
 
-<section class="cta" id="contact"><div class="wrap"><div class="cta-box"><div><h2>What is preventing the business getting where you want it to go?</h2><p>Tell me what you are trying to improve. We’ll work out whether there is a problem worth addressing.</p></div><a class="btn" href="https://calendar.app.google/mh5X91ErPgUXtCqR7" target="_blank" rel="noopener">Book an introductory call</a></div></div></section>
-<footer><div class="wrap footer-inner"><div>© <span data-year></span> Digital Sales Made Simple Ltd, trading as Revenue Execution</div><div class="footer-links"><a href="mailto:richard@revenueexecution.co">richard@revenueexecution.co</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></div></footer>
-<script src="site.js"></script>
-</body></html>
+    <div id="pipeline" class="solution">
+      <div class="solution-hero"><div class="eyebrow">Improve Pipeline Conversion</div><h3>Turn more existing opportunity into revenue.</h3><p>If pipeline exists but too much stalls, slips or disappears, the problem usually sits somewhere between qualification, buyer alignment, progression and management intervention.</p></div>
+      <div class="solution-flow">
+        <div class="flow-step"><div class="label">What you want</div><h4>Convert more pipeline</h4><p>For example, increase win rate from 18% to 28%.</p></div>
+        <div class="flow-step"><div class="label">What I diagnose</div><h4>Where opportunities are leaking</h4><ul><li>Qualification</li><li>Stage progression</li><li>Proposal conversion</li><li>Manager deal inspection</li></ul></div>
+        <div class="flow-step"><div class="label">What we may change</div><h4>The deal execution process</h4><ul><li>Qualification criteria</li><li>Stage evidence</li><li>Deal reviews</li><li>Value articulation</li></ul></div>
+        <div class="flow-step measure"><div class="label">How we measure it</div><h4>Did conversion improve?</h4><ul><li>Win rate</li><li>Stage conversion</li><li>Sales cycle</li><li>Slippage rate</li></ul></div>
+      </div>
+      <div class="example"><b>Example finding</b><span>Low-quality deals are entering pipeline and management is intervening too late. The fix is qualification discipline and better deal inspection, not simply more seller activity.</span></div>
+    </div>
+
+    <div id="predict" class="solution">
+      <div class="solution-hero"><div class="eyebrow">Increase Predictability</div><h3>Know what the business is likely to deliver before the period ends.</h3><p>Predictability comes from evidence, common standards and management discipline — not better spreadsheet formatting.</p></div>
+      <div class="solution-flow">
+        <div class="flow-step"><div class="label">What you want</div><h4>A reliable view of future performance</h4><p>For example, a dependable 90-day revenue forecast.</p></div>
+        <div class="flow-step"><div class="label">What I diagnose</div><h4>Why the forecast cannot be trusted</h4><ul><li>Pipeline quality</li><li>Forecast methodology</li><li>CRM discipline</li><li>Management cadence</li></ul></div>
+        <div class="flow-step"><div class="label">What we may change</div><h4>The standards and visibility behind the forecast</h4><ul><li>Forecast rules</li><li>Evidence standards</li><li>Reporting</li><li>Review rhythm</li></ul></div>
+        <div class="flow-step measure"><div class="label">How we measure it</div><h4>Did confidence improve?</h4><ul><li>Forecast accuracy</li><li>Slippage</li><li>Pipeline coverage</li><li>Variance to actual</li></ul></div>
+      </div>
+      <div class="example"><b>Example finding</b><span>Forecast calls are opinion-led because “commit” means something different to every seller. The improvement is a common evidence standard and a disciplined management cadence.</span></div>
+    </div>
+
+    <div id="dependency" class="solution">
+      <div class="solution-hero"><div class="eyebrow">Reduce Owner Dependency</div><h3>Build a business that does not need the owner in every decision.</h3><p>Owner dependency usually persists because information, authority, customer ownership or process knowledge has not moved into the wider business.</p></div>
+      <div class="solution-flow">
+        <div class="flow-step"><div class="label">What you want</div><h4>Reduce day-to-day owner intervention</h4><p>For example, operate for four weeks without constant escalation.</p></div>
+        <div class="flow-step"><div class="label">What I diagnose</div><h4>Why work keeps coming back to you</h4><ul><li>Decision rights</li><li>Management visibility</li><li>Customer ownership</li><li>Role clarity</li></ul></div>
+        <div class="flow-step"><div class="label">What we may change</div><h4>The operating structure around the owner</h4><ul><li>Delegated authority</li><li>Management reporting</li><li>Account ownership</li><li>Operating cadence</li></ul></div>
+        <div class="flow-step measure"><div class="label">How we measure it</div><h4>Did dependency fall?</h4><ul><li>Owner interventions</li><li>Escalations</li><li>Decision speed</li><li>Management autonomy</li></ul></div>
+      </div>
+      <div class="example"><b>Example finding</b><span>Managers have responsibility but not enough information or authority to act, so routine decisions continue to escalate. The fix is visibility plus delegated decision rights.</span></div>
+    </div>
+
+    <div id="scale" class="solution">
+      <div class="solution-hero"><div class="eyebrow">Improve Process & Scale</div><h3>Fix the processes the business has outgrown.</h3><p>As companies grow, manual handoffs, duplicated work and unclear ownership can become expensive constraints on capacity and customer experience.</p></div>
+      <div class="solution-flow">
+        <div class="flow-step"><div class="label">What you want</div><h4>Increase speed, capacity and consistency</h4><p>For example, reduce customer onboarding from 30 days to 10.</p></div>
+        <div class="flow-step"><div class="label">What I diagnose</div><h4>Where the workflow is creating friction</h4><ul><li>Handoffs</li><li>Approvals</li><li>Manual touches</li><li>Rework and bottlenecks</li></ul></div>
+        <div class="flow-step"><div class="label">What we may change</div><h4>The workflow, ownership or automation</h4><ul><li>Process redesign</li><li>Clear ownership</li><li>System configuration</li><li>Automation</li></ul></div>
+        <div class="flow-step measure"><div class="label">How we measure it</div><h4>Did the process improve?</h4><ul><li>Cycle time</li><li>Error rate</li><li>Manual touches</li><li>Capacity / throughput</li></ul></div>
+      </div>
+      <div class="example"><b>Example finding</b><span>Four manual handoffs and duplicated data entry are causing delay and rework. The fix is a redesigned workflow with clearer ownership and selective automation.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="method" id="method">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="color:#9ed0c0">One method</div>
+      <h2>Diagnose. Plan. Execute.</h2>
+      <p>The work starts by understanding what is actually driving the business outcome — not by jumping straight to a solution.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><span>01</span><h3>Diagnose</h3><p>Review the evidence, metrics, processes and conversations needed to isolate the real constraint.</p></div>
+      <div class="step"><span>02</span><h3>Plan</h3><p>Define the required change, sequence the priorities and build a practical implementation plan.</p></div>
+      <div class="step"><span>03</span><h3>Execute</h3><p>Work alongside the business to implement the changes and embed them into normal operations.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="diagnostic" id="diagnostic">
+  <div class="wrap diag-grid">
+    <div>
+      <div class="eyebrow">Paid entry point</div>
+      <h2>Owner Business Performance Diagnostic</h2>
+      <div class="price">€2,500</div>
+      <p class="lead" style="font-size:18px">You tell me what you are trying to achieve and where the business is falling short. I work backwards from the goal to identify what is actually preventing it.</p>
+      <a class="btn" href="https://calendar.app.google/mh5X91ErPgUXtCqR7" target="_blank" rel="noopener">Discuss your business goal</a>
+    </div>
+    <div class="diag-box">
+      <div class="diag-list">
+        <div class="diag-row"><b>Start with</b><span>Your business goal, target or problem.</span></div>
+        <div class="diag-row"><b>Examine</b><span>The metrics, evidence and processes that influence the result.</span></div>
+        <div class="diag-row"><b>Identify</b><span>The gaps, root causes and constraints with the greatest commercial impact.</span></div>
+        <div class="diag-row"><b>Output</b><span>A clear, prioritised view of what needs to change and why.</span></div>
+        <div class="diag-row"><b>Then</b><span>Stop there, build the implementation plan, or work together to execute it.</span></div>
+      </div>
+      <div class="scope"><b>Diagnostic scope</b><span>One primary owner outcome. One primary metric. Typically 1–3 important processes. Enough evidence to identify the real constraint and prioritise action — not a full-company transformation project.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap system-grid">
+    <div>
+      <div class="eyebrow">Why diagnosis matters</div>
+      <h2>Performance is produced by a system, not one isolated function.</h2>
+      <p class="lead" style="font-size:18px">A growth problem might be pipeline, pricing, retention, proposition or execution. A profitability problem might sit in discounting, customer mix, process cost or operating discipline. The visible symptom is rarely the whole problem.</p>
+    </div>
+    <div class="system-map">
+      <div class="pill">Market</div><div class="pill">Customers</div><div class="pill">Proposition</div>
+      <div class="pill">Pricing</div><div class="pill">GTM</div><div class="pill">Sales</div>
+      <div class="pill">Operations</div><div class="pill">Management</div><div class="pill">Data</div>
+      <div class="pill">Governance</div><div class="pill">Process</div><div class="pill">Execution</div>
+    </div>
+  </div>
+</section>
+
+<section class="proof" id="about">
+  <div class="wrap proof-grid">
+    <div>
+      <div class="eyebrow">About</div>
+      <h2>20+ years building and fixing commercial performance.</h2>
+      <p class="lead" style="font-size:18px">I work directly with owners and leadership teams, combining commercial experience with evidence-led diagnosis and hands-on implementation. My background spans enterprise sales, GTM, pricing, partner development, enablement, commercial operations and business transformation.</p>
+      <p><b>Experience includes:</b> Eircom · BT · Oracle · Cloudera · ACETECH · Bluemetrix</p>
+    </div>
+    <blockquote>“Richard cut straight through our pipeline noise and installed the exact execution discipline our leadership team needed to scale predictably.”<small>David Heneghan, CEO — CX Index</small></blockquote>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div class="cta-box">
+      <div><h2>What is preventing the business getting where you want it to go?</h2><p>Start with the goal. We’ll work out whether there is a problem worth diagnosing.</p></div>
+      <a class="btn" href="https://calendar.app.google/mh5X91ErPgUXtCqR7" target="_blank" rel="noopener">Book an introductory call</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div>© Digital Sales Made Simple Ltd, trading as Revenue Execution</div>
+    <div><a href="privacy.html">Privacy</a></div>
+  </div>
+</footer>
+
+<script>
+const buttons=[...document.querySelectorAll('.solution-nav button')];
+const solutions=[...document.querySelectorAll('.solution')];
+function showSolution(id){
+  buttons.forEach(b=>b.classList.toggle('active',b.dataset.target===id));
+  solutions.forEach(s=>s.classList.toggle('active',s.id===id));
+}
+buttons.forEach(btn=>btn.addEventListener('click',()=>showSolution(btn.dataset.target)));
+document.querySelectorAll('.issue[data-solution]').forEach(card=>{
+  card.addEventListener('click',()=>showSolution(card.dataset.solution));
+});
+</script>
+</body>
+</html>
