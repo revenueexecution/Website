@@ -101,6 +101,21 @@ h2{font-size:46px;line-height:1.08;letter-spacing:-.04em;margin:10px 0 14px}
 .about-copy h2{margin-top:10px}
 blockquote{margin:0;background:white;border-radius:22px;padding:29px;font-size:20px;line-height:1.45;border:1px solid rgba(16,37,43,.08)}
 blockquote small{display:block;margin-top:18px;font-size:13px;color:var(--muted);font-weight:700}
+
+.process-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.process-card{background:white;border:1px solid var(--line);border-radius:20px;padding:24px;min-height:230px}
+.process-card .num{font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--green)}
+.process-card h3{font-size:21px;line-height:1.16;margin:10px 0 10px}
+.process-card p{margin:0;color:var(--muted);font-size:14px}
+.faq{background:var(--soft)}
+.faq-list{display:grid;gap:12px;max-width:900px}
+.faq-item{background:white;border:1px solid var(--line);border-radius:16px;padding:0 20px}
+.faq-item summary{cursor:pointer;list-style:none;font-weight:800;padding:18px 0;position:relative;padding-right:28px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";position:absolute;right:0;top:16px;font-size:22px;color:var(--green)}
+.faq-item[open] summary::after{content:"–"}
+.faq-item p{margin:0 0 18px;color:var(--muted);font-size:15px}
+
 .cta{padding:90px 0}
 .cta-box{background:var(--green);color:white;border-radius:28px;padding:56px;display:flex;align-items:end;justify-content:space-between;gap:40px}
 .cta-box h2{margin:0 0 10px;max-width:720px}
@@ -114,6 +129,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--muted);f
  .about-content{grid-template-columns:160px 1fr}
  .about-photo{width:160px}
  .issues,.steps,.solution-nav{grid-template-columns:1fr 1fr}
+ .process-grid{grid-template-columns:1fr 1fr}
  .solution-flow{grid-template-columns:1fr 1fr}
  .flow-step:nth-child(2)::after{display:none}
  h1{font-size:49px}
@@ -122,7 +138,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--muted);f
 }
 @media(max-width:650px){
  .wrap{padding-left:20px;padding-right:20px}
- .issues,.steps,.solution-nav,.solution-flow{grid-template-columns:1fr}
+ .issues,.steps,.solution-nav,.solution-flow,.process-grid{grid-template-columns:1fr}
  .flow-step::after{display:none}
  h1{font-size:41px}.hero{padding-top:70px}
  .cta-box{padding:34px}.diag-row,.example{grid-template-columns:1fr}
@@ -139,6 +155,8 @@ footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--muted);f
       <a href="#issues">Problems I Fix</a>
       <a href="#diagnostic">Diagnostic</a>
       <a href="#method">How I Work</a>
+      <a href="#process">Process</a>
+      <a href="#faq">FAQ</a>
       <a href="#about">About</a>
       <a class="btn" href="https://calendar.app.google/mh5X91ErPgUXtCqR7" target="_blank" rel="noopener">Book an introductory call</a>
     </div>
@@ -289,7 +307,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--muted);f
     <div>
       <div class="eyebrow">Paid entry point</div>
       <h2>Owner Business Performance Diagnostic</h2>
-      <div class="price">€2,500</div>
+      <div class="price">From €2,500</div>
       <p class="lead" style="font-size:18px">You tell me what you are trying to achieve and where the business is falling short. I work backwards from the goal to identify what is actually preventing it.</p>
       <a class="btn" href="https://calendar.app.google/mh5X91ErPgUXtCqR7" target="_blank" rel="noopener">Discuss your business goal</a>
     </div>
@@ -337,6 +355,42 @@ footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--muted);f
   </div>
 </section>
 
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What happens next</div>
+      <h2>A simple process from first conversation to action.</h2>
+      <p>You do not need to prepare a transformation programme. We start with the business result you need, diagnose the constraint, and decide what is worth changing.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-card"><div class="num">01</div><h3>Introductory call</h3><p>We discuss the business goal, where performance is falling short and whether there is a worthwhile problem to diagnose.</p></div>
+      <div class="process-card"><div class="num">02</div><h3>Diagnostic scope agreed</h3><p>We define the primary outcome, metric, evidence required, people involved and timing.</p></div>
+      <div class="process-card"><div class="num">03</div><h3>Evidence & interviews</h3><p>I review the relevant data, processes and supporting evidence and speak with the people closest to the issue.</p></div>
+      <div class="process-card"><div class="num">04</div><h3>Findings & recommendations</h3><p>You receive a clear view of the constraint, root causes, commercial impact and priority improvements.</p></div>
+      <div class="process-card"><div class="num">05</div><h3>Decide what happens next</h3><p>Take the findings away, ask me to build the implementation plan, or work with me to execute the changes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">FAQ</div>
+      <h2>What owners usually want to know.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item"><summary>What kind of business is Revenue Execution for?</summary><p>Owner-led businesses where growth, profitability, predictability, owner dependency or process constraints are materially affecting performance.</p></details>
+      <details class="faq-item"><summary>What does the diagnostic cost?</summary><p>The Owner Business Performance Diagnostic starts from €2,500. Final scope depends on the outcome being investigated, the evidence available and the number of processes that need to be examined.</p></details>
+      <details class="faq-item"><summary>How long does it take?</summary><p>Timing depends on scope and access to information, but the diagnostic is deliberately time-bound and focused on one primary owner outcome rather than a full-company review.</p></details>
+      <details class="faq-item"><summary>What information will you need from us?</summary><p>Only the information relevant to the outcome being diagnosed. This may include financial data, CRM records, process information, contracts, reporting and other evidence needed to understand what is driving the result.</p></details>
+      <details class="faq-item"><summary>Who needs to be involved?</summary><p>Usually the owner plus the people closest to the relevant process or metric. The aim is to get enough evidence to reach a defensible conclusion without creating unnecessary disruption.</p></details>
+      <details class="faq-item"><summary>What happens after the diagnostic?</summary><p>You can stop with the findings, ask me to build the implementation plan, or engage Revenue Execution to help execute the changes.</p></details>
+      <details class="faq-item"><summary>What if the problem turns out not to be sales?</summary><p>That is exactly why the work starts with diagnosis. A growth or profitability problem may sit in pricing, customer retention, operations, management, process, data or execution rather than sales alone.</p></details>
+    </div>
+  </div>
+</section>
+
 <section class="cta" id="contact">
   <div class="wrap">
     <div class="cta-box">
@@ -349,7 +403,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--muted);f
 <footer>
   <div class="wrap footer-row">
     <div>© Digital Sales Made Simple Ltd, trading as Revenue Execution</div>
-    <div><a href="privacy.html">Privacy</a></div>
+    <div><a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="terms.html">Terms &amp; Conditions</a></div>
   </div>
 </footer>
 
