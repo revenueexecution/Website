@@ -95,7 +95,10 @@ h2{font-size:46px;line-height:1.08;letter-spacing:-.04em;margin:10px 0 14px}
 .system-map{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .pill{background:white;border:1px solid var(--line);padding:15px 12px;border-radius:14px;text-align:center;font-weight:700;font-size:14px}
 .proof{background:var(--warm)}
-.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.proof-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:50px;align-items:start}
+.about-content{display:grid;grid-template-columns:190px 1fr;gap:28px;align-items:start}
+.about-photo{width:190px;aspect-ratio:1/1;object-fit:cover;border-radius:22px;display:block;border:1px solid rgba(16,37,43,.10)}
+.about-copy h2{margin-top:10px}
 blockquote{margin:0;background:white;border-radius:22px;padding:29px;font-size:20px;line-height:1.45;border:1px solid rgba(16,37,43,.08)}
 blockquote small{display:block;margin-top:18px;font-size:13px;color:var(--muted);font-weight:700}
 .cta{padding:90px 0}
@@ -108,6 +111,8 @@ footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--muted);f
 .footer-row a{text-decoration:underline}
 @media(max-width:960px){
  .hero-grid,.diag-grid,.system-grid,.proof-grid{grid-template-columns:1fr}
+ .about-content{grid-template-columns:160px 1fr}
+ .about-photo{width:160px}
  .issues,.steps,.solution-nav{grid-template-columns:1fr 1fr}
  .solution-flow{grid-template-columns:1fr 1fr}
  .flow-step:nth-child(2)::after{display:none}
@@ -121,6 +126,8 @@ footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--muted);f
  .flow-step::after{display:none}
  h1{font-size:41px}.hero{padding-top:70px}
  .cta-box{padding:34px}.diag-row,.example{grid-template-columns:1fr}
+ .about-content{grid-template-columns:1fr}
+ .about-photo{width:150px}
 }
 </style>
 </head>
@@ -317,11 +324,14 @@ footer{border-top:1px solid var(--line);padding:28px 0 42px;color:var(--muted);f
 
 <section class="proof" id="about">
   <div class="wrap proof-grid">
-    <div>
-      <div class="eyebrow">About</div>
-      <h2>20+ years building and fixing commercial performance.</h2>
-      <p class="lead" style="font-size:18px">I work directly with owners and leadership teams, combining commercial experience with evidence-led diagnosis and hands-on implementation. My background spans enterprise sales, GTM, pricing, partner development, enablement, commercial operations and business transformation.</p>
-      <p><b>Experience includes:</b> Eircom · BT · Oracle · Cloudera · ACETECH · Bluemetrix</p>
+    <div class="about-content">
+      <img class="about-photo" src="richard-fox-bw.png" alt="Richard Fox, Revenue Execution">
+      <div class="about-copy">
+        <div class="eyebrow">About</div>
+        <h2>20+ years building and fixing commercial performance.</h2>
+        <p class="lead" style="font-size:18px">I work directly with owners and leadership teams, combining commercial experience with evidence-led diagnosis and hands-on implementation. My background spans enterprise sales, GTM, pricing, partner development, enablement, commercial operations and business transformation.</p>
+        <p><b>Experience includes:</b> Eircom · BT · Oracle · Cloudera · ACETECH · Bluemetrix</p>
+      </div>
     </div>
     <blockquote>“Richard cut straight through our pipeline noise and installed the exact execution discipline our leadership team needed to scale predictably.”<small>David Heneghan, CEO — CX Index</small></blockquote>
   </div>
