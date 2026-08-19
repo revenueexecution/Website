@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Revenue Execution Owner Website V10 -->
+<!-- Revenue Execution Owner Website V11 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -21,16 +21,16 @@ h1{font-size:64px;line-height:1.02;letter-spacing:-.05em;margin:12px 0 24px}h2{f
 .actions{display:flex;gap:10px;flex-wrap:wrap}.head{max-width:850px;margin-bottom:34px}.head p{color:var(--x);font-size:17px}
 
 .journey{background:var(--s)}.journey-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.journey-card{width:100%;background:#fff;border:2px solid var(--l);border-radius:19px;padding:25px;min-height:215px;text-align:left;font:inherit;cursor:pointer;transition:.18s}.journey-card:hover,.journey-card.active{border-color:var(--g);transform:translateY(-2px);box-shadow:0 10px 24px #10252b0d}.journey-card.grow{border-color:var(--g)}
+.journey-card{width:100%;background:#fff;border:2px solid var(--l);border-radius:19px;padding:22px;min-height:190px;text-align:left;font:inherit;cursor:pointer;transition:.18s}.journey-card:hover,.journey-card.active{border-color:var(--g);transform:translateY(-2px);box-shadow:0 10px 24px #10252b0d}.journey-card.grow{border-color:var(--g)}
 .journey-card h3{font-size:29px;margin:7px 0}.journey-card p{color:var(--x);margin:0}.tag{display:inline-block;margin-top:17px;background:var(--m);color:var(--g2);padding:6px 9px;border-radius:999px;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.card-explore{display:block;margin-top:11px;font-size:10px;font-weight:900;color:var(--g2);text-transform:uppercase;letter-spacing:.05em}
 
-.issues{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.issue{width:100%;background:#fff;border:2px solid var(--l);border-radius:18px;padding:24px;min-height:205px;transition:.18s;text-align:left;font:inherit;cursor:pointer}
+.issues{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.issue{width:100%;background:#fff;border:2px solid var(--l);border-radius:18px;padding:21px;min-height:180px;transition:.18s;text-align:left;font:inherit;cursor:pointer}
 .issue:hover,.issue.active{border-color:var(--g);transform:translateY(-2px);box-shadow:0 10px 24px #10252b0d}.top{display:flex;justify-content:space-between;gap:10px;align-items:center}.num{font-size:11px;font-weight:900;color:var(--g)}
 .cat{font-size:9px;text-transform:uppercase;letter-spacing:.08em;background:var(--m);color:var(--g2);padding:5px 8px;border-radius:999px;font-weight:900}.issue h3{font-size:21px;line-height:1.18;margin:12px 0 8px}.issue p{font-size:14px;color:var(--x);margin:0}
 
-.contextdetail{margin-top:20px;background:var(--i);color:#fff;border-radius:22px;padding:28px;display:grid;grid-template-columns:.85fr 1.15fr;gap:32px}
-.contextdetail h3{font-size:28px;margin:7px 0 10px}.contextdetail p{color:#c5d2d4;margin:0}.contextgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.contextbox{border:1px solid #ffffff20;background:#ffffff08;border-radius:13px;padding:14px}.contextbox b{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#9ed0c0;margin-bottom:6px}.contextbox span{font-size:12px}
+.contextdetail{display:none;margin-top:18px;background:#fff;color:var(--i);border:1px solid var(--l);border-radius:18px;padding:22px;grid-template-columns:.8fr 1.2fr;gap:22px;box-shadow:0 12px 28px #10252b0b}.contextdetail.visible{display:grid}
+.contextdetail h3{font-size:24px;margin:6px 0 8px}.contextdetail p{color:var(--x);margin:0}.contextgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.contextbox{border:1px solid var(--l);background:var(--s);border-radius:12px;padding:13px}.contextbox b{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--g2);margin-bottom:5px}.contextbox span{font-size:12px;color:var(--i)}
 
 .commercial{background:var(--p)}.zones{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .zone{background:#fff;border:1px solid var(--l);border-radius:22px;padding:22px}.zone.market{border-top:5px solid var(--g)}.zone.sell{border-top:5px solid var(--i)}.zone.customer{border-top:5px solid #9a8b6f}
@@ -280,8 +280,8 @@ const journeyData=[
 ];
 const journeyDetail=document.getElementById('journeyDetail');
 const journeyButtons=[...document.querySelectorAll('.journey-card')];
-function showJourney(i){const s=journeyData[i];journeyButtons.forEach((b,j)=>b.classList.toggle('active',j===i));journeyDetail.innerHTML=`<div><div class="ey" style="color:#9ed0c0">${s[0]} context</div><h3>${s[0]}</h3><p>${s[1]}</p></div><div class="contextgrid"><div class="contextbox"><b>Owner priorities</b><span>${s[2]}</span></div><div class="contextbox"><b>Common constraints</b><span>${s[3]}</span></div><div class="contextbox" style="grid-column:1/-1"><b>How Revenue Execution helps</b><span>${s[4]}</span></div></div>`;}
-journeyButtons.forEach(b=>b.addEventListener('click',()=>showJourney(+b.dataset.journey)));showJourney(1);
+function showJourney(i){const s=journeyData[i];journeyButtons.forEach((b,j)=>b.classList.toggle('active',j===i));journeyDetail.classList.add('visible');journeyDetail.innerHTML=`<div><div class="ey" style="color:#9ed0c0">${s[0]} context</div><h3>${s[0]}</h3><p>${s[1]}</p></div><div class="contextgrid"><div class="contextbox"><b>Owner priorities</b><span>${s[2]}</span></div><div class="contextbox"><b>Common constraints</b><span>${s[3]}</span></div><div class="contextbox" style="grid-column:1/-1"><b>How Revenue Execution helps</b><span>${s[4]}</span></div></div>`;}
+journeyButtons.forEach(b=>b.addEventListener('click',()=>{showJourney(+b.dataset.journey);if(window.innerWidth<700)journeyDetail.scrollIntoView({behavior:'smooth',block:'start'});}));
 
 const issueFlows=[
 ["Growth","Grow annual revenue from €4m to €5m","Revenue mix · pipeline creation · conversion · pricing · retention/expansion · commercial execution","Insufficient quality demand · weak ICP/message fit · poor qualification · low win rate · underused expansion","Find the highest-consequence growth constraint and quantify the improvement opportunity."],
@@ -293,8 +293,8 @@ const issueFlows=[
 ];
 const issueDetail=document.getElementById('issueDetail');
 const issueButtons=[...document.querySelectorAll('.issue')];
-function showIssue(i){const s=issueFlows[i];issueButtons.forEach((b,j)=>b.classList.toggle('active',j===i));issueDetail.innerHTML=`<div><div class="ey" style="color:#9ed0c0">${s[0]}</div><h3>${s[1]}</h3><p>Start with the owner outcome, then work backwards through the evidence.</p></div><div class="contextgrid"><div class="contextbox"><b>What we examine</b><span>${s[2]}</span></div><div class="contextbox"><b>Common causes</b><span>${s[3]}</span></div><div class="contextbox" style="grid-column:1/-1"><b>Diagnostic objective</b><span>${s[4]}</span></div></div>`;}
-issueButtons.forEach(b=>b.addEventListener('click',()=>showIssue(+b.dataset.issue)));showIssue(0);
+function showIssue(i){const s=issueFlows[i];issueButtons.forEach((b,j)=>b.classList.toggle('active',j===i));issueDetail.classList.add('visible');issueDetail.innerHTML=`<div><div class="ey" style="color:#9ed0c0">${s[0]}</div><h3>${s[1]}</h3><p>Start with the owner outcome, then work backwards through the evidence.</p></div><div class="contextgrid"><div class="contextbox"><b>What we examine</b><span>${s[2]}</span></div><div class="contextbox"><b>Common causes</b><span>${s[3]}</span></div><div class="contextbox" style="grid-column:1/-1"><b>Diagnostic objective</b><span>${s[4]}</span></div></div>`;}
+issueButtons.forEach(b=>b.addEventListener('click',()=>{showIssue(+b.dataset.issue);if(window.innerWidth<700)issueDetail.scrollIntoView({behavior:'smooth',block:'start'});}));
 
 const stages=[
 ["Solution & Market Fit","Is the offer solving a valuable problem the market will pay to fix?","Weak solution value or weak market fit makes every downstream commercial activity harder.","Weak differentiation · unclear value · low urgency · poor proof","Lower conversion, longer sales cycles, more price pressure and wasted commercial effort.","Customer value, problem urgency, willingness to pay, proof and differentiation."],
