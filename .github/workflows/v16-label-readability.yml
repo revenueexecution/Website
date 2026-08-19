@@ -1,0 +1,40 @@
+name: V16 label readability
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v16-label-readability.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply V16 label readability changes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          replacements = [
+            ('<!-- Revenue Execution Owner Website V15 -->','<!-- Revenue Execution Owner Website V16 -->'),
+            ('.ey{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--g);font-weight:900}', '.ey{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--g);font-weight:900}.hero .ey{font-size:13px;color:var(--g2)}'),
+            ('.cat{font-size:9px;text-transform:uppercase;letter-spacing:.08em;background:var(--m);color:var(--g2);padding:5px 8px;border-radius:999px;font-weight:900}', '.cat{font-size:11px;text-transform:uppercase;letter-spacing:.08em;background:var(--m);color:var(--i);padding:5px 8px;border-radius:999px;font-weight:900}'),
+            ('.goal-label{display:block;margin:13px 0 3px;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--g2);font-weight:900}', '.goal-label{display:block;margin:13px 0 3px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--i);font-weight:900}')
+          ]
+          for old, new in replacements:
+              assert s.count(old) == 1, old
+              s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+      - name: Commit V16 and remove one-shot workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git rm .github/workflows/v16-label-readability.yml
+          git commit -m "Owner website V16: improve label readability"
+          git push
