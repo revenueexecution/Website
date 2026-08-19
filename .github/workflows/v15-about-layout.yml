@@ -1,0 +1,36 @@
+name: Owner Website V15 About Layout
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v15-about-layout.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update About layout to V15
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('<!-- Revenue Execution Owner Website V14 -->','<!-- Revenue Execution Owner Website V15 -->')
+          old='.proof{background:var(--a)}.proofgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:start}.about{display:grid;grid-template-columns:175px 1fr;gap:32px;align-items:start}.about img{width:175px;aspect-ratio:1;object-fit:cover;border-radius:18px}.about h2{margin:8px 0 18px}.about .lead{margin:0 0 18px}.about p:last-child{margin:0}'
+          new='.proof{background:var(--a)}.proofgrid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.75fr);gap:52px;align-items:center}.about{display:grid;grid-template-columns:190px minmax(0,1fr);gap:38px;align-items:center}.about img{width:190px;aspect-ratio:1;object-fit:cover;border-radius:18px}.about h2{margin:8px 0 20px;max-width:560px}.about .lead{margin:0 0 22px;max-width:620px}.about p:last-child{margin:0;line-height:1.6}'
+          if old not in s:
+              raise SystemExit('Expected V14 About CSS block not found')
+          s=s.replace(old,new)
+          p.write_text(s)
+          PY
+      - name: Commit V15
+        run: |
+          git config user.name 'Revenue Execution'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Owner website V15: fix About section proportions and spacing'
+          git push
