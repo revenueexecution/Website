@@ -1,0 +1,42 @@
+name: One-off enable shared site script
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/oneoff-enable-site-js.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-homepage:
+    if: github.event.head_commit.message == 'Add one-off homepage analytics patch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Add shared site script to homepage
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          tag = '<script src="site.js"></script>'
+          if tag not in s:
+              s = s.replace('</body>', tag + '\n</body>')
+              p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit homepage change
+        run: |
+          if git diff --quiet; then
+            echo "Homepage already loads site.js"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Enable shared analytics script on homepage"
+          git push
