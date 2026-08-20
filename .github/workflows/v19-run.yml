@@ -1,0 +1,23 @@
+name: V19 run
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v19-run.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python .v19_update.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git rm .v19_update.py .github/workflows/v19-run.yml
+          git commit -m "Owner website V19: expand commercial system"
+          git push
