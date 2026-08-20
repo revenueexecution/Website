@@ -177,7 +177,58 @@ Growth should create a stronger business — not simply a busier one.
 
 # LinkedIn Post
 
-Draft to be written.
+Revenue is growing.
+
+So why does the business feel harder to run?
+
+More customers. More sales. More activity.
+
+But also:
+
+• tighter cash
+• less reliable forecasts
+• stretched people
+• more firefighting
+• more decisions landing back with the owner
+
+It’s easy to conclude that the business simply needs more people, more leads or better systems.
+
+But growth often does something else:
+
+**It exposes a constraint that was already there.**
+
+If the goal is to grow from €3m to €4m, “we need more sales” isn't really a diagnosis.
+
+The constraint could be:
+
+• not enough qualified pipeline
+• poor conversion
+• weak pricing discipline
+• insufficient delivery capacity
+• slow cash collection
+• customer retention
+• founder dependency
+
+Each requires a completely different response.
+
+A useful way to work backwards is:
+
+**Goal → Metric → Process → Gap → Improvement**
+
+Start with the outcome.
+
+Find the metric that determines whether you achieve it.
+
+Understand the process producing that metric.
+
+Then identify where current performance falls short of what is required.
+
+That is usually a much better place to invest time and money than immediately fixing the most visible symptom.
+
+**Growth should create a stronger business — not simply a busier one.**
+
+If your business is growing but feels harder to control, where is the pressure showing up most: pipeline, margin, cash, delivery or people?
+
 
 # Call to Action
 
