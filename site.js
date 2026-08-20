@@ -3,6 +3,28 @@
   const CONSENT_KEY = 're_analytics_consent_v1';
   let gaLoaded = false;
 
+  function ensureFavicon() {
+    const href = '/favicon.png?v=20';
+    let icon = document.querySelector('link[rel="icon"]');
+    if (!icon) {
+      icon = document.createElement('link');
+      icon.rel = 'icon';
+      icon.type = 'image/png';
+      document.head.appendChild(icon);
+    }
+    icon.href = href;
+
+    let touch = document.querySelector('link[rel="apple-touch-icon"]');
+    if (!touch) {
+      touch = document.createElement('link');
+      touch.rel = 'apple-touch-icon';
+      document.head.appendChild(touch);
+    }
+    touch.href = href;
+  }
+
+  ensureFavicon();
+
   function getConsent() {
     try { return localStorage.getItem(CONSENT_KEY); } catch (_) { return null; }
   }
@@ -68,7 +90,7 @@
       #re-consent-banner p{margin:0;color:#d7e1e2;font-size:14px;line-height:1.5;max-width:680px}
       #re-consent-banner a{color:#fff;text-decoration:underline}
       #re-consent-banner .re-consent-actions{display:flex;gap:10px;flex-wrap:wrap}
-      #re-consent-banner button{border:1px solid #fff;border-radius:999px;padding:10px 15px;font:inherit;font-weight:750;cursor:pointer}
+      #re-consent-banner button{border:1px solid #fff;border-radius:999px;padding:10px 15px;min-width:155px;font:inherit;font-weight:750;cursor:pointer}
       #re-consent-accept{background:#fff;color:#10252b}
       #re-consent-decline{background:transparent;color:#fff}
       .re-cookie-settings{background:none;border:0;padding:0;margin:0;color:inherit;text-decoration:underline;font:inherit;font-size:inherit;cursor:pointer}
@@ -85,12 +107,12 @@
     const banner = document.createElement('div');
     banner.id = 're-consent-banner';
     banner.setAttribute('role', 'dialog');
-    banner.setAttribute('aria-label', 'Analytics preferences');
+    banner.setAttribute('aria-label', 'Cookie preferences');
     banner.innerHTML = `
       <div class="re-consent-inner">
-        <p>Revenue Execution uses Google Analytics to understand which pages and resources are useful. Analytics is only enabled if you accept. <a href="/privacy.html">Privacy policy</a>.</p>
+        <p>We use essential storage to remember your cookie choice. With your permission, Google Analytics helps us understand which pages and resources are useful. Analytics cookies are not set unless you accept. <a href="/cookie-policy.html">Cookie policy</a> · <a href="/privacy.html">Privacy</a>.</p>
         <div class="re-consent-actions">
-          <button id="re-consent-decline" type="button">No thanks</button>
+          <button id="re-consent-decline" type="button">Reject non-essential</button>
           <button id="re-consent-accept" type="button">Accept analytics</button>
         </div>
       </div>`;
@@ -114,13 +136,23 @@
   function addCookieSettingsControl() {
     const footer = document.querySelector('footer');
     if (!footer || footer.querySelector('.re-cookie-settings')) return;
+    const target = footer.querySelector('.footer-links') || footer.querySelector('.footer > div:last-child') || footer;
+
+    if (!target.querySelector('a[href*="cookie-policy"]')) {
+      const cookieLink = document.createElement('a');
+      cookieLink.href = '/cookie-policy.html';
+      cookieLink.textContent = 'Cookies';
+      target.appendChild(document.createTextNode(' · '));
+      target.appendChild(cookieLink);
+    }
+
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 're-cookie-settings';
-    button.textContent = 'Analytics settings';
+    button.textContent = 'Cookie settings';
     button.addEventListener('click', () => showConsentBanner(true));
-    footer.appendChild(document.createTextNode(' · '));
-    footer.appendChild(button);
+    target.appendChild(document.createTextNode(' · '));
+    target.appendChild(button);
   }
 
   function trackClick(event) {
