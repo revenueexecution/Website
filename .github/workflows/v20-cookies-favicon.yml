@@ -1,0 +1,119 @@
+name: V20 cookies and favicon
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v20-cookies-favicon.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply V20 cookies and favicon changes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          # Update every HTML page so favicon and consent logic are site-wide.
+          for p in Path('.').rglob('*.html'):
+              s = p.read_text()
+
+              # One canonical favicon path + cache-buster on every page.
+              icon = '<link rel="icon" type="image/png" href="/favicon.png?v=20">'
+              s, n = re.subn(r'<link\s+rel=["\']icon["\'][^>]*>', icon, s, count=1, flags=re.I)
+              if n == 0:
+                  s = s.replace('</head>', icon + '\n</head>', 1)
+
+              touch = '<link rel="apple-touch-icon" href="/favicon.png?v=20">'
+              s = re.sub(r'<link\s+rel=["\']apple-touch-icon["\'][^>]*>', touch, s, count=1, flags=re.I)
+              if 'rel="apple-touch-icon"' not in s:
+                  s = s.replace(icon, icon + '\n' + touch, 1)
+
+              # Normalize / add the shared consent + analytics script.
+              s = re.sub(r'<script\s+src=["\'](?:\.\./)*site\.js["\']\s*></script>', '<script src="/site.js"></script>', s, flags=re.I)
+              if '<script src="/site.js"></script>' not in s:
+                  s = s.replace('</body>', '<script src="/site.js"></script>\n</body>', 1)
+
+              p.write_text(s)
+
+          # Main website version marker.
+          p = Path('index.html')
+          s = p.read_text()
+          s = s.replace('<!-- Revenue Execution Owner Website V19 -->','<!-- Revenue Execution Owner Website V20 -->',1)
+          p.write_text(s)
+
+          # Improve privacy wording and link to the dedicated cookie policy.
+          p = Path('privacy.html')
+          s = p.read_text()
+          s = s.replace('website analytics banner','website cookie consent banner')
+          s = s.replace('“Analytics settings”','“Cookie settings”')
+          if 'cookie-policy.html' not in s:
+              s = s.replace('<h2>Contact</h2>', '<h2>Cookies</h2><p>For details about essential storage, optional analytics cookies and how to change your preference, see our <a href="/cookie-policy.html">Cookie Policy</a>.</p>\n<h2>Contact</h2>', 1)
+          p.write_text(s)
+
+          # Update the existing consent manager rather than creating a second one.
+          p = Path('site.js')
+          s = p.read_text()
+          s = s.replace("banner.setAttribute('aria-label', 'Analytics preferences');", "banner.setAttribute('aria-label', 'Cookie preferences');")
+          s = s.replace('Revenue Execution uses Google Analytics to understand which pages and resources are useful. Analytics is only enabled if you accept. <a href="/privacy.html">Privacy policy</a>.', 'We use essential storage to remember your cookie choice. With your permission, Google Analytics helps us understand which pages and resources are useful. Analytics cookies are not set unless you accept. <a href="/cookie-policy.html">Cookie policy</a> · <a href="/privacy.html">Privacy</a>.')
+          s = s.replace('<button id="re-consent-decline" type="button">No thanks</button>', '<button id="re-consent-decline" type="button">Reject non-essential</button>')
+          s = s.replace("button.textContent = 'Analytics settings';", "button.textContent = 'Cookie settings';")
+          s = s.replace("      #re-consent-banner button{border:1px solid #fff;border-radius:999px;padding:10px 15px;font:inherit;font-weight:750;cursor:pointer}", "      #re-consent-banner button{border:1px solid #fff;border-radius:999px;padding:10px 15px;min-width:155px;font:inherit;font-weight:750;cursor:pointer}")
+
+          old = '''  function addCookieSettingsControl() {
+    const footer = document.querySelector('footer');
+    if (!footer || footer.querySelector('.re-cookie-settings')) return;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 're-cookie-settings';
+    button.textContent = 'Cookie settings';
+    button.addEventListener('click', () => showConsentBanner(true));
+    footer.appendChild(document.createTextNode(' · '));
+    footer.appendChild(button);
+  }'''
+          new = '''  function addCookieSettingsControl() {
+    const footer = document.querySelector('footer');
+    if (!footer || footer.querySelector('.re-cookie-settings')) return;
+    const target = footer.querySelector('.footer-links') || footer.querySelector('.footer > div:last-child') || footer;
+
+    if (!target.querySelector('a[href*="cookie-policy"]')) {
+      const cookieLink = document.createElement('a');
+      cookieLink.href = '/cookie-policy.html';
+      cookieLink.textContent = 'Cookies';
+      target.appendChild(document.createTextNode(' · '));
+      target.appendChild(cookieLink);
+    }
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 're-cookie-settings';
+    button.textContent = 'Cookie settings';
+    button.addEventListener('click', () => showConsentBanner(true));
+    target.appendChild(document.createTextNode(' · '));
+    target.appendChild(button);
+  }'''
+          assert old in s
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+      - name: Verify V20
+        run: |
+          grep -q 'Owner Website V20' index.html
+          grep -q 'href="/favicon.png?v=20"' index.html
+          grep -q 'src="/site.js"' index.html
+          grep -q 'Reject non-essential' site.js
+          grep -q 'Cookie settings' site.js
+          test -f cookie-policy.html
+      - name: Commit V20 and remove workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html privacy.html terms.html about.html diagnostic.html solutions.html resources site.js cookie-policy.html || true
+          git rm .github/workflows/v20-cookies-favicon.yml
+          git commit -m "Owner website V20: add cookie consent and fix favicon"
+          git push
