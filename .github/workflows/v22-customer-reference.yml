@@ -1,0 +1,53 @@
+name: V22 customer reference capture
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v22-customer-reference.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply V22 customer reference capture
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text()
+
+          s = s.replace('<!-- Revenue Execution Owner Website V20 -->','<!-- Revenue Execution Owner Website V22 -->',1)
+          s = s.replace('<!-- Revenue Execution Owner Website V21 -->','<!-- Revenue Execution Owner Website V22 -->',1)
+          s = s.replace('Three connected areas. Thirteen points where performance can break down.','Three connected areas. Fourteen points where performance can break down.',1)
+
+          old = '<button class="stage" data-i="12"><span class="n">13</span><b>Expansion</b><small>Are we systematically identifying and converting credible growth opportunities in existing accounts?</small><span class="explore">Explore →</span></button>'
+          new = old + '\n<button class="stage" data-i="13"><span class="n">14</span><b>Customer Reference Capture</b><small>Are we systematically capturing customer proof, testimonials and references while value is visible and the relationship is strong?</small><span class="explore">Explore →</span></button>'
+          assert old in s
+          s = s.replace(old, new, 1)
+
+          old_stage = '["Expansion","Are we systematically identifying and converting credible growth opportunities in existing accounts?","Expansion turns proven customer value into additional revenue where there is a legitimate unmet need or wider use case.","No account growth plan · weak cross-sell visibility · reactive renewals · poor stakeholder coverage","Existing-customer revenue is underused and growth becomes overly dependent on new-logo acquisition.","Account potential, whitespace, stakeholder coverage, expansion triggers, opportunity creation and expansion conversion."]'
+          new_stage = old_stage + ',\n["Customer Reference Capture","Are we systematically capturing customer proof, testimonials and references while value is visible and the relationship is strong?","Customer reference capture turns delivered value into credible proof that supports future selling and strengthens buyer trust.","No reference process · requests made too late · weak proof · reliance on a few advocates · unclear permissions","Strong customer outcomes remain invisible, sales lacks credible proof and new-business conversion becomes harder than it needs to be.","Reference eligibility, timing, permissions, evidence capture, testimonial and case-study process, ownership and reuse."]'
+          assert old_stage in s
+          s = s.replace(old_stage, new_stage, 1)
+
+          p.write_text(s)
+          PY
+      - name: Verify V22
+        run: |
+          grep -q 'Owner Website V22' index.html
+          grep -q 'Fourteen points' index.html
+          grep -q 'Customer Reference Capture' index.html
+          grep -q 'data-i="13"' index.html
+      - name: Commit V22 and remove workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git rm .github/workflows/v22-customer-reference.yml
+          git commit -m "Owner website V22: add customer reference capture"
+          git push
