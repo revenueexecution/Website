@@ -33,14 +33,7 @@
   <div class="resource-search">
     <input id="resourceSearch" type="search" placeholder="Search resources — e.g. bottleneck, growth, pipeline, owner dependency" aria-label="Search resources">
   </div>
-  <div class="resource-tags" id="resourceTags" aria-label="Filter resources by tag">
-    <button class="resource-tag active" type="button" data-filter="all">All</button>
-    <button class="resource-tag" type="button" data-filter="growth">Growth</button>
-    <button class="resource-tag" type="button" data-filter="owner-dependency">Owner Dependency</button>
-    <button class="resource-tag" type="button" data-filter="scaling">Scaling</button>
-    <button class="resource-tag" type="button" data-filter="leadership">Leadership</button>
-    <button class="resource-tag" type="button" data-filter="commercial-performance">Commercial Performance</button>
-  </div>
+  <div class="resource-tags" id="resourceTags" aria-label="Filter resources by tag"></div>
   <p class="resource-count" id="resourceCount">2 resources</p>
 </div>
 
@@ -50,7 +43,7 @@
 <div class="eyebrow">Owner dependency</div>
 <h3>If every important decision comes back to you, the business has a bottleneck</h3>
 <p>When decisions, approvals and escalations repeatedly flow back to one leader, growth can create more dependency instead of more capacity.</p>
-<div class="card-tags"><span>Owner Dependency</span><span>Scaling</span><span>Leadership</span></div>
+<div class="card-tags"><span>Owner Dependency</span><span>Scaling</span><span>Leadership</span><span>Commercial Performance</span></div>
 <p style="margin-top:16px;"><strong>Read insight →</strong></p>
 </a>
 
@@ -72,12 +65,38 @@
 (() => {
   const search = document.getElementById('resourceSearch');
   const cards = [...document.querySelectorAll('.resource-card')];
-  const tags = [...document.querySelectorAll('.resource-tag')];
+  const tagContainer = document.getElementById('resourceTags');
   const count = document.getElementById('resourceCount');
   const empty = document.getElementById('resourceEmpty');
   let activeFilter = 'all';
 
   function normalise(value){ return (value || '').toLowerCase().trim(); }
+  function tagLabel(slug){
+    return slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  }
+
+  function buildTags(){
+    const unique = new Set();
+    cards.forEach(card => normalise(card.dataset.tags).split(/\s+/).filter(Boolean).forEach(tag => unique.add(tag)));
+    const ordered = [...unique].sort((a,b) => tagLabel(a).localeCompare(tagLabel(b)));
+    tagContainer.innerHTML = '';
+
+    const all = document.createElement('button');
+    all.className = 'resource-tag active';
+    all.type = 'button';
+    all.dataset.filter = 'all';
+    all.textContent = 'All';
+    tagContainer.appendChild(all);
+
+    ordered.forEach(tag => {
+      const button = document.createElement('button');
+      button.className = 'resource-tag';
+      button.type = 'button';
+      button.dataset.filter = tag;
+      button.textContent = tagLabel(tag);
+      tagContainer.appendChild(button);
+    });
+  }
 
   function applyFilters(track = false){
     const query = normalise(search.value);
@@ -105,6 +124,8 @@
     }
   }
 
+  buildTags();
+
   let timer;
   search.addEventListener('input', () => {
     clearTimeout(timer);
@@ -112,11 +133,13 @@
     timer = setTimeout(() => applyFilters(true), 600);
   });
 
-  tags.forEach(button => button.addEventListener('click', () => {
+  tagContainer.addEventListener('click', event => {
+    const button = event.target.closest('.resource-tag');
+    if (!button) return;
     activeFilter = button.dataset.filter;
-    tags.forEach(tag => tag.classList.toggle('active', tag === button));
+    [...tagContainer.querySelectorAll('.resource-tag')].forEach(tag => tag.classList.toggle('active', tag === button));
     applyFilters(true);
-  }));
+  });
 
   applyFilters(false);
 })();
