@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Everything still comes back to you?</title>
+  <desc id="desc">Owner dependency visual showing routine business decisions converging on the owner.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f705d"/></marker>
+  </defs>
+  <rect width="1200" height="675" fill="#f7f6f1"/>
+  <text x="64" y="76" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="800" letter-spacing="3" fill="#2f705d">OWNER DEPENDENCY</text>
+  <line x1="64" y1="96" x2="145" y2="96" stroke="#2f705d" stroke-width="3"/>
+  <text x="64" y="170" font-family="Georgia,serif" font-size="62" font-weight="700" fill="#10252b">Everything still comes</text>
+  <text x="64" y="238" font-family="Georgia,serif" font-size="62" font-weight="700" fill="#10252b">back to you?</text>
+  <text x="64" y="300" font-family="Inter,Arial,sans-serif" font-size="30" font-weight="700" fill="#235746">Your business may have a dependency problem.</text>
+  <text x="64" y="348" font-family="Inter,Arial,sans-serif" font-size="22" fill="#64757a">Growth should create capacity — not more dependence on the owner.</text>
+
+  <g font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="#10252b">
+    <rect x="690" y="82" width="175" height="72" rx="18" fill="#ffffff" stroke="#d8dfdc" stroke-width="2"/>
+    <text x="777" y="125" text-anchor="middle">CUSTOMERS</text>
+    <rect x="930" y="180" width="180" height="72" rx="18" fill="#ffffff" stroke="#d8dfdc" stroke-width="2"/>
+    <text x="1020" y="223" text-anchor="middle">PRICING</text>
+    <rect x="930" y="425" width="180" height="72" rx="18" fill="#ffffff" stroke="#d8dfdc" stroke-width="2"/>
+    <text x="1020" y="468" text-anchor="middle">APPROVALS</text>
+    <rect x="690" y="522" width="175" height="72" rx="18" fill="#ffffff" stroke="#d8dfdc" stroke-width="2"/>
+    <text x="777" y="565" text-anchor="middle">PEOPLE</text>
+    <rect x="495" y="302" width="190" height="72" rx="18" fill="#ffffff" stroke="#d8dfdc" stroke-width="2"/>
+    <text x="590" y="345" text-anchor="middle">ESCALATIONS</text>
+  </g>
+
+  <g stroke="#2f705d" stroke-width="4" fill="none" marker-end="url(#arrow)">
+    <path d="M790 155 C820 210 820 250 845 300"/>
+    <path d="M930 220 C900 250 885 275 865 305"/>
+    <path d="M930 460 C900 430 885 405 865 377"/>
+    <path d="M790 522 C820 465 820 430 845 380"/>
+    <path d="M685 338 L785 338"/>
+  </g>
+
+  <circle cx="850" cy="340" r="92" fill="#10252b"/>
+  <circle cx="850" cy="340" r="72" fill="#2f705d"/>
+  <text x="850" y="330" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="800" letter-spacing="2" fill="#dcece5">OWNER /</text>
+  <text x="850" y="360" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="900" fill="#ffffff">LEADER</text>
+
+  <line x1="64" y1="560" x2="155" y2="560" stroke="#2f705d" stroke-width="3"/>
+  <text x="64" y="615" font-family="Georgia,serif" font-size="38" font-weight="700" fill="#235746">Revenue Execution</text>
+</svg>
