@@ -21,19 +21,14 @@ jobs:
           p = Path('index.html')
           s = p.read_text()
 
-          # Version marker.
           s = s.replace('<!-- Revenue Execution Owner Website V20 -->','<!-- Revenue Execution Owner Website V21 -->',1)
-
-          # Clarify Grow pill.
           s = s.replace('<span class="tag">Current focus</span>','<span class="tag">Growth &amp; Performance</span>',1)
 
-          # Add selection-state styling for the top pills and a full-strength pill in the expanded card.
           marker = '.journey-card h3{font-size:29px;margin:7px 0}.journey-card p{color:var(--x);margin:0}.tag{display:inline-block;margin-top:17px;background:var(--m);color:var(--g2);padding:6px 9px;border-radius:999px;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.card-explore{display:block;margin-top:11px;font-size:10px;font-weight:900;color:var(--g2);text-transform:uppercase;letter-spacing:.05em}'
           replacement = '.journey-card h3{font-size:29px;margin:7px 0}.journey-card p{color:var(--x);margin:0}.tag{display:inline-block;margin-top:17px;background:var(--m);color:var(--g2);padding:6px 9px;border-radius:999px;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;transition:opacity .18s ease}.journey-grid.has-selection .tag{opacity:.28}.journey-detail-tag{display:inline-block;margin:0 0 10px;background:var(--m);color:var(--g2);padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.card-explore{display:block;margin-top:11px;font-size:10px;font-weight:900;color:var(--g2);text-transform:uppercase;letter-spacing:.05em}'
           assert marker in s
           s = s.replace(marker, replacement, 1)
 
-          # Add clear pill labels to the journey data.
           old_data = '''const journeyData=[
 ["Build","The business needs stronger commercial foundations before growth can become consistent.","Clarify the offer, target market, roles, core processes and management visibility.","Ad-hoc selling · unclear ownership · inconsistent process · limited visibility","Build the commercial foundations, controls and operating discipline needed for repeatable performance."],
 ["Grow","The foundations exist, but performance is not improving fast enough or consistently enough.","Increase revenue, profitability, predictability, conversion and scalability without adding unnecessary complexity.","Stalled growth · weak conversion · unreliable forecasts · margin pressure · owner bottlenecks","Identify the constraints holding back the growth goal and implement the highest-value commercial and operational improvements."],
@@ -47,7 +42,6 @@ jobs:
           assert old_data in s
           s = s.replace(old_data, new_data, 1)
 
-          # Update expanded-card rendering and fade the three top pills after a selection.
           old_show = '''function showJourney(i){const s=journeyData[i];journeyButtons.forEach((b,j)=>b.classList.toggle('active',j===i));journeyDetail.classList.add('visible');journeyDetail.innerHTML=`<div><div class="ey" style="color:#9ed0c0">${s[0]} context</div><h3>${s[0]}</h3><p>${s[1]}</p></div><div class="contextgrid"><div class="contextbox"><b>Owner priorities</b><span>${s[2]}</span></div><div class="contextbox"><b>Common constraints</b><span>${s[3]}</span></div><div class="contextbox" style="grid-column:1/-1"><b>How Revenue Execution helps</b><span>${s[4]}</span></div></div>`;}'''
           new_show = '''function showJourney(i){const s=journeyData[i];journeyButtons.forEach((b,j)=>b.classList.toggle('active',j===i));document.querySelector('.journey-grid')?.classList.add('has-selection');journeyDetail.classList.add('visible');journeyDetail.innerHTML=`<div><div class="ey" style="color:#9ed0c0">${s[0]} context</div><span class="journey-detail-tag">${s[1]}</span><h3>${s[0]}</h3><p>${s[2]}</p></div><div class="contextgrid"><div class="contextbox"><b>Owner priorities</b><span>${s[3]}</span></div><div class="contextbox"><b>Common constraints</b><span>${s[4]}</span></div><div class="contextbox" style="grid-column:1/-1"><b>How Revenue Execution helps</b><span>${s[5]}</span></div></div>`;}'''
           assert old_show in s
@@ -69,3 +63,5 @@ jobs:
           git rm .github/workflows/v21-owner-pills.yml
           git commit -m "Owner website V21: clarify owner journey pills"
           git push
+
+# trigger
