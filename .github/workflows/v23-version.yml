@@ -1,0 +1,32 @@
+name: V23 version marker
+
+on:
+  push:
+    paths:
+      - '.github/workflows/v23-version.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mark homepage V23
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('<!-- Revenue Execution Owner Website V22 -->','<!-- Revenue Execution Owner Website V23 -->',1)
+          p.write_text(s)
+          PY
+      - name: Commit V23 marker and remove workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git rm .github/workflows/v23-version.yml
+          git commit -m "Owner website V23: selected-card focus interactions"
+          git push
