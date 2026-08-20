@@ -117,3 +117,5 @@ jobs:
           git rm .github/workflows/v20-cookies-favicon.yml
           git commit -m "Owner website V20: add cookie consent and fix favicon"
           git push
+
+# trigger
