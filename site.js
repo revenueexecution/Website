@@ -23,7 +23,58 @@
     touch.href = href;
   }
 
+  function enhanceOwnerJourney() {
+    const labels = {
+      Build: 'Foundations & Control',
+      Grow: 'Growth & Performance',
+      Exit: 'Value & Readiness'
+    };
+
+    const grid = document.querySelector('.journey-grid');
+    const detail = document.getElementById('journeyDetail');
+    const cards = [...document.querySelectorAll('.journey-card')];
+    if (!grid || !detail || !cards.length) return;
+
+    if (!document.getElementById('re-journey-pill-styles')) {
+      const style = document.createElement('style');
+      style.id = 're-journey-pill-styles';
+      style.textContent = `
+        .journey-grid.re-has-selection .tag{opacity:.28;transition:opacity .18s ease}
+        .re-journey-detail-tag{display:inline-block;margin:8px 0 10px;background:#dcece5;color:#235746;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+      `;
+      document.head.appendChild(style);
+    }
+
+    cards.forEach(card => {
+      const name = card.querySelector('h3')?.textContent?.trim();
+      const label = labels[name];
+      const tag = card.querySelector('.tag');
+      if (tag && label) tag.textContent = label;
+
+      card.addEventListener('click', () => {
+        if (!label) return;
+        grid.classList.add('re-has-selection');
+
+        // The homepage's existing click handler renders the expanded card first.
+        // If a future homepage version already renders its own selected pill, do not duplicate it.
+        if (detail.querySelector('.journey-detail-tag')) return;
+        detail.querySelector('.re-journey-detail-tag')?.remove();
+
+        const first = detail.firstElementChild;
+        if (!first) return;
+
+        const pill = document.createElement('span');
+        pill.className = 're-journey-detail-tag';
+        pill.textContent = label;
+        const eyebrow = first.querySelector('.ey');
+        if (eyebrow) eyebrow.insertAdjacentElement('afterend', pill);
+        else first.prepend(pill);
+      });
+    });
+  }
+
   ensureFavicon();
+  enhanceOwnerJourney();
 
   function getConsent() {
     try { return localStorage.getItem(CONSENT_KEY); } catch (_) { return null; }
