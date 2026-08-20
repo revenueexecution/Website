@@ -39,7 +39,9 @@
       const style = document.createElement('style');
       style.id = 're-journey-pill-styles';
       style.textContent = `
-        .journey-grid.re-has-selection .tag{opacity:.28;transition:opacity .18s ease}
+        .journey-grid.re-has-selection .journey-card{transition:opacity .18s ease,transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+        .journey-grid.re-has-selection .journey-card:not(.active){opacity:.34;transform:none;box-shadow:none}
+        .journey-grid.re-has-selection .journey-card.active{opacity:1}
         .re-journey-detail-tag{display:inline-block;margin:8px 0 10px;background:#dcece5;color:#235746;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
       `;
       document.head.appendChild(style);
@@ -55,8 +57,6 @@
         if (!label) return;
         grid.classList.add('re-has-selection');
 
-        // The homepage's existing click handler renders the expanded card first.
-        // If a future homepage version already renders its own selected pill, do not duplicate it.
         if (detail.querySelector('.journey-detail-tag')) return;
         detail.querySelector('.re-journey-detail-tag')?.remove();
 
@@ -73,8 +73,47 @@
     });
   }
 
+  function enhanceOwnerProblems() {
+    const grid = document.getElementById('issuesGrid') || document.querySelector('.issues');
+    const detail = document.getElementById('issueDetail');
+    const cards = [...document.querySelectorAll('.issue')];
+    if (!grid || !detail || !cards.length) return;
+
+    if (!document.getElementById('re-issue-focus-styles')) {
+      const style = document.createElement('style');
+      style.id = 're-issue-focus-styles';
+      style.textContent = `
+        .issues.re-has-selection .issue{transition:opacity .18s ease,transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+        .issues.re-has-selection .issue:not(.active){opacity:.34;transform:none;box-shadow:none}
+        .issues.re-has-selection .issue.active{opacity:1}
+        .re-issue-detail-tag{display:inline-block;margin:8px 0 10px;background:#dcece5;color:#235746;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+      `;
+      document.head.appendChild(style);
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const label = card.querySelector('.cat')?.textContent?.trim();
+        if (!label) return;
+        grid.classList.add('re-has-selection');
+
+        detail.querySelector('.re-issue-detail-tag')?.remove();
+        const first = detail.firstElementChild;
+        if (!first) return;
+
+        const pill = document.createElement('span');
+        pill.className = 're-issue-detail-tag';
+        pill.textContent = label;
+        const eyebrow = first.querySelector('.ey');
+        if (eyebrow) eyebrow.insertAdjacentElement('afterend', pill);
+        else first.prepend(pill);
+      });
+    });
+  }
+
   ensureFavicon();
   enhanceOwnerJourney();
+  enhanceOwnerProblems();
 
   function getConsent() {
     try { return localStorage.getItem(CONSENT_KEY); } catch (_) { return null; }
