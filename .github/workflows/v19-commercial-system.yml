@@ -22,7 +22,6 @@ jobs:
           assert '<!-- Revenue Execution Owner Website V18 -->' in s
           s = s.replace('<!-- Revenue Execution Owner Website V18 -->','<!-- Revenue Execution Owner Website V19 -->',1)
           s = s.replace('Three connected areas. Eight points where performance can break down.','Three connected areas. Thirteen points where performance can break down.',1)
-
           old_market='''<button class="stage" data-i="0"><span class="n">01</span><b>Solution & Market Fit</b><small>Is the offer solving a valuable problem the market will pay to fix?</small><span class="explore">Explore →</span></button>
 <button class="stage" data-i="1"><span class="n">02</span><b>ICP & Positioning</b><small>Are we targeting the right buyers with a message that matters?</small><span class="explore">Explore →</span></button>
 <button class="stage" data-i="2"><span class="n">03</span><b>Demand Generation</b><small>Are we creating enough quality demand from the right market?</small><span class="explore">Explore →</span></button>'''
@@ -32,7 +31,6 @@ jobs:
 <button class="stage" data-i="3"><span class="n">04</span><b>Demand Generation</b><small>Are we creating enough quality demand from the right market?</small><span class="explore">Explore →</span></button>'''
           assert old_market in s
           s = s.replace(old_market,new_market,1)
-
           old_sell='''<button class="stage" data-i="3"><span class="n">04</span><b>Engagement & Qualification</b><small>Are we creating real conversations and pursuing the right opportunities?</small><span class="explore">Explore →</span></button>
 <button class="stage" data-i="4"><span class="n">05</span><b>Opportunity Management</b><small>Are qualified deals progressing with evidence, ownership and clear next steps?</small><span class="explore">Explore →</span></button>
 <button class="stage" data-i="5"><span class="n">06</span><b>Deal Progression & Forecast Confidence</b><small>Can management see what is real, what is at risk and what will close?</small><span class="explore">Explore →</span></button>
@@ -44,7 +42,6 @@ jobs:
 <button class="stage" data-i="8"><span class="n">09</span><b>Commercials & Close</b><small>Are pricing, proposals and final decisions converting opportunity into revenue?</small><span class="explore">Explore →</span></button>'''
           assert old_sell in s
           s = s.replace(old_sell,new_sell,1)
-
           old_customer='''<p>Make sure customers reach value quickly, stay, expand and become a stronger source of future growth.</p>
 <button class="stage" data-i="7"><span class="n">08</span><b>Onboarding, Retention & Expansion</b><small>Are customers reaching value, renewing, expanding and becoming advocates?</small><span class="explore">Explore →</span></button>'''
           new_customer='''<p>Make sure customers onboard well, realise value, stay and become a stronger source of future growth.</p>
@@ -54,7 +51,6 @@ jobs:
 <button class="stage" data-i="12"><span class="n">13</span><b>Expansion</b><small>Are we systematically identifying and converting credible growth opportunities in existing accounts?</small><span class="explore">Explore →</span></button>'''
           assert old_customer in s
           s = s.replace(old_customer,new_customer,1)
-
           start = s.index('const stages=[')
           end = s.index(']\nconst comdetail', start) + 1
           stages = '''const stages=[
@@ -84,3 +80,4 @@ jobs:
           git rm .github/workflows/v19-commercial-system.yml
           git commit -m "Owner website V19: expand commercial system"
           git push
+# trigger
